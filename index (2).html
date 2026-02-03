@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
+  <title>Roya 💖</title>
+
+  <style>
+    :root{
+      --bg1:#070812;
+      --bg2:#220a1e;
+      --text:#ffffff;
+      --soft:rgba(255,255,255,.78);
+      --pink:#ff4d8d;
+      --rose:#ff77a8;
+      --gold:#ffd166;
+      --card:rgba(255,255,255,.08);
+      --shadow:0 18px 60px rgba(0,0,0,.45);
+      --border:rgba(255,255,255,.14);
+    }
+
+    *{ box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 900px at 18% 10%, rgba(255,77,141,.26), transparent 55%),
+        radial-gradient(1100px 800px at 85% 30%, rgba(255,209,102,.16), transparent 55%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow:hidden;
+    }
+
+    .glow{
+      position:fixed; inset:-40%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,77,141,.20), transparent 38%),
+        radial-gradient(circle at 70% 40%, rgba(255,209,102,.14), transparent 42%),
+        radial-gradient(circle at 40% 80%, rgba(255,119,168,.12), transparent 46%);
+      filter: blur(44px);
+      animation: drift 12s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+    @keyframes drift{
+      from{ transform:translate3d(-1%, -1%, 0) scale(1); }
+      to{ transform:translate3d(1%, 1%, 0) scale(1.03); }
+    }
+
+    .hearts{ position:fixed; inset:0; pointer-events:none; }
+    .heart{
+      position:absolute;
+      width:14px; height:14px;
+      background:var(--pink);
+      transform: rotate(45deg);
+      opacity:.9;
+      border-radius:2px;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.25));
+      animation: floatUp linear infinite;
+    }
+    .heart:before,.heart:after{
+      content:"";
+      position:absolute;
+      width:14px; height:14px;
+      background:inherit;
+      border-radius:50%;
+    }
+    .heart:before{ left:-7px; top:0; }
+    .heart:after{ left:0; top:-7px; }
+    @keyframes floatUp{
+      from{ transform:translateY(110vh) rotate(45deg) scale(.85); opacity:0; }
+      12%{ opacity:.9; }
+      to{ transform:translateY(-18vh) rotate(45deg) scale(1.18); opacity:0; }
+    }
+
+    /* phone-first layout */
+    .wrap{
+      height:100%;
+      display:grid;
+      place-items:center;
+      padding: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right))
+               max(18px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+      position:relative;
+      z-index:2;
+    }
+    .card{
+      width:min(920px, 96vw);
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:24px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(255,77,141,.25), transparent 38%),
+        radial-gradient(circle at 80% 30%, rgba(255,209,102,.16), transparent 42%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .inner{
+      position:relative;
+      padding: 18px 16px 16px;
+      display:grid;
+      gap:12px;
+    }
+    .topline{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      color:rgba(255,255,255,.78);
+      font-size:13px;
+      letter-spacing:.15px;
+      backdrop-filter: blur(10px);
+    }
+    .badge b{ color:#fff; font-weight:800; }
+
+    .title{
+      margin: 4px 0 0;
+      font-size: clamp(22px, 5.2vw, 44px);
+      line-height:1.14;
+      letter-spacing:-.6px;
+      text-shadow: 0 12px 28px rgba(0,0,0,.35);
+    }
+    .subtitle{
+      margin:0;
+      color:var(--soft);
+      font-size: clamp(13.5px, 3.6vw, 18px);
+      line-height:1.55;
+      max-width:72ch;
+    }
+
+    .stage{
+      margin-top:6px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      padding: 16px 14px;
+      position:relative;
+      overflow:hidden;
+      min-height: 380px;
+    }
+
+    .message{
+      display:grid;
+      gap:12px;
+      place-items:center;
+      text-align:center;
+      padding: 6px 4px;
+    }
+    .big{
+      margin:0;
+      font-size: clamp(20px, 5vw, 40px);
+      line-height:1.2;
+    }
+    .small{
+      margin:0;
+      color:var(--soft);
+      font-size: clamp(14px, 3.6vw, 18px);
+      line-height:1.55;
+      max-width:72ch;
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:4px;
+      width:100%;
+    }
+    button{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      border-radius:999px;
+      padding: 14px 18px;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:.2px;
+      transition: transform .12s ease, opacity .12s ease;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      min-width: 140px;
+    }
+    button:active{ transform: translateY(1px) scale(.99); }
+    .primary{
+      background: linear-gradient(135deg, var(--pink), var(--rose));
+      color:#130812;
+    }
+    .ghost{
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+      color:#fff;
+      backdrop-filter: blur(10px);
+    }
+
+    .footer{
+      margin-top:2px;
+      color:rgba(255,255,255,.55);
+      font-size:12px;
+      text-align:center;
+      min-height: 18px;
+    }
+
+    /* Animation scene */
+    .scene{
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .6s ease;
+      padding: 14px;
+    }
+    .scene.on{ opacity:1; pointer-events:auto; }
+
+    .animWrap{
+      width:min(720px, 100%);
+      display:grid;
+      gap:14px;
+      place-items:center;
+      text-align:center;
+    }
+
+    .pulseHeart{
+      width:84px; height:84px;
+      background:var(--pink);
+      transform: rotate(45deg);
+      border-radius:10px;
+      position:relative;
+      animation: beat .9s ease-in-out infinite;
+      filter: drop-shadow(0 18px 30px rgba(255,77,141,.28));
+    }
+    .pulseHeart:before,.pulseHeart:after{
+      content:"";
+      position:absolute;
+      width:84px; height:84px;
+      background:inherit;
+      border-radius:50%;
+    }
+    .pulseHeart:before{ left:-42px; top:0; }
+    .pulseHeart:after{ left:0; top:-42px; }
+    @keyframes beat{
+      0%,100%{ transform:rotate(45deg) scale(1); }
+      50%{ transform:rotate(45deg) scale(1.12); }
+    }
+
+    .ring{
+      width:118px; height:118px;
+      border-radius:50%;
+      border:8px solid rgba(255,255,255,.24);
+      position:relative;
+      animation: spin 3.2s linear infinite;
+    }
+    .ring:before{
+      content:"";
+      position:absolute;
+      inset:12px;
+      border-radius:50%;
+      border:6px solid rgba(255,209,102,.55);
+      filter: blur(.2px);
+    }
+    .ring:after{
+      content:"";
+      position:absolute;
+      width:14px; height:14px;
+      border-radius:50%;
+      background: var(--gold);
+      top:6px; left:50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 24px rgba(255,209,102,.55);
+    }
+    @keyframes spin{ from{ transform: rotate(0deg); } to{ transform: rotate(360deg); } }
+
+    .type{
+      font-size: clamp(16px, 4.3vw, 24px);
+      color:#fff;
+      padding: 0 6px;
+      min-height: 3.2em;
+      max-width: 60ch;
+    }
+    .cursor{
+      display:inline-block;
+      width:10px;
+      height:1.1em;
+      background: rgba(255,255,255,.8);
+      margin-left:6px;
+      transform: translateY(3px);
+      animation: blink .9s steps(2) infinite;
+      border-radius:2px;
+    }
+    @keyframes blink{ 50%{ opacity:0; } }
+
+    /* Poem reveal (appears AFTER Yes) */
+    .poem{
+      width: min(680px, 96%);
+      padding: 14px 14px 12px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.14);
+      text-align: right;
+      direction: rtl;
+      box-shadow: 0 16px 50px rgba(0,0,0,.28);
+      opacity:0;
+      transform: translateY(10px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .poem.show{
+      opacity:1;
+      transform: translateY(0);
+    }
+    .poem .label{
+      text-align:left;
+      direction:ltr;
+      font-size:12px;
+      color: rgba(255,255,255,.60);
+      margin-bottom:8px;
+      letter-spacing:.2px;
+    }
+    .poem p{
+      margin:0;
+      font-family: ui-serif, "Times New Roman", Georgia, serif;
+      font-size: clamp(16px, 4.1vw, 20px);
+      line-height:1.85;
+      color: rgba(255,255,255,.92);
+      white-space: pre-line;
+    }
+
+    .finale{
+      display:grid;
+      gap:10px;
+      place-items:center;
+      text-align:center;
+      padding: 0 6px;
+    }
+    .finale h2{
+      margin:0;
+      font-size: clamp(22px, 5.4vw, 38px);
+      letter-spacing:-.4px;
+    }
+    .finale p{
+      margin:0;
+      color:var(--soft);
+      font-size: clamp(14px, 3.7vw, 18px);
+      line-height:1.65;
+      max-width: 72ch;
+    }
+
+    .hidden{ display:none !important; }
+
+    @media (min-width: 700px){
+      .inner{ padding: 28px 24px 22px; gap:16px; }
+      .stage{ padding: 22px 18px; min-height: 320px; }
+      button{ min-width: 160px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow"></div>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="inner">
+        <div class="topline">
+          <div class="badge">For <b>ROYA</b> • from <b>NASER</b></div>
+          <div class="badge" id="hint">Tap “Start” when you’re ready 💘</div>
+        </div>
+
+        <h1 class="title">Roya… I have one question.</h1>
+        <p class="subtitle">
+          First… a few words. Then… the biggest question. Then… a little surprise.
+        </p>
+
+        <div class="stage" aria-live="polite">
+          <!-- MAIN -->
+          <div class="message" id="questionArea">
+            <p class="big" id="questionLine">💌</p>
+            <p class="small" id="questionSub">Press start — and don’t blink.</p>
+
+            <div class="actions">
+              <button class="primary" id="startBtn">Start 💖</button>
+              <button class="ghost hidden" id="yesBtn">Yes 💘</button>
+              <button class="ghost hidden" id="noBtn">No 🙈</button>
+            </div>
+
+            <div class="footer" id="footerNote"></div>
+          </div>
+
+          <!-- ANIMATION -->
+          <div class="scene" id="scene">
+            <div class="animWrap">
+              <div class="pulseHeart"></div>
+              <div class="ring hidden" id="ring"></div>
+
+              <!-- POEM REVEAL (NOW HERE, AFTER YES) -->
+              <div class="poem" id="poemBox">
+                <div class="label">Just for you</div>
+                <p>
+رویا، تو معجزه‌ای که به زندگی‌ام ایمان داد
+در چشمانت آرامشی‌ست که جهان ندارد
+اگر سرنوشت نامی داشته باشد، آن نام توست
+                </p>
+              </div>
+
+              <div class="type">
+                <span id="typed"></span><span class="cursor"></span>
+              </div>
+
+              <div class="finale hidden" id="finale">
+                <h2>Roya… you are mine, and mine only.</h2>
+                <p>
+                  And if you’ll let me… we’ll grow really <b>o l l l l d d d</b> together —
+                  still holding hands, still laughing, still choosing each other… every day. 💞
+                </p>
+                <div class="actions">
+                  <button class="primary" id="confettiBtn">Celebrate 🎉</button>
+                  <button class="ghost" id="restartBtn">Replay 🔁</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Floating hearts
+    const hearts = document.getElementById("hearts");
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      const left = Math.random() * 100;
+      const size = 10 + Math.random()*16;
+      h.style.left = left + "vw";
+      h.style.width = size + "px";
+      h.style.height = size + "px";
+      h.style.animationDuration = (6 + Math.random()*6) + "s";
+      h.style.opacity = (0.4 + Math.random()*0.6).toFixed(2);
+      hearts.appendChild(h);
+      setTimeout(() => h.remove(), 13000);
+    }
+    setInterval(spawnHeart, 260);
+    for(let i=0;i<14;i++) setTimeout(spawnHeart, i*120);
+
+    // Elements
+    const startBtn = document.getElementById("startBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const questionLine = document.getElementById("questionLine");
+    const questionSub = document.getElementById("questionSub");
+    const hint = document.getElementById("hint");
+    const footerNote = document.getElementById("footerNote");
+
+    const scene = document.getElementById("scene");
+    const ring = document.getElementById("ring");
+    const poemBox = document.getElementById("poemBox");
+
+    const typed = document.getElementById("typed");
+    const finale = document.getElementById("finale");
+    const confettiBtn = document.getElementById("confettiBtn");
+    const restartBtn = document.getElementById("restartBtn");
+
+    const languageQuestions = [
+      { lang: "FA", text: "رویا… آیا ولنتاین من می‌شوی؟", sub: "تمام قلبم برای توست 💗" },
+      { lang: "FR", text: "Roya… veux-tu être ma Valentine ?", sub: "Je t’aime plus que les mots 💞" },
+      { lang: "EN", text: "Roya… will you be my Valentine?", sub: "My favorite person… always 💘" }
+    ];
+
+    const animationLines = [
+      "Okay… now watch this. 💫",
+      "Roya, my heart picked you — and never looked back.",
+      "You are mine… and mine only.",
+      "And one day… we’ll be really o l l l l d d d together 🥺",
+      "Still holding hands. Still laughing.",
+      "Still choosing each other. Every single day."
+    ];
+
+    function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+    async function cycleLanguages(){
+      startBtn.classList.add("hidden");
+      hint.textContent = "Don’t rush… just feel it ❤️";
+      footerNote.textContent = "";
+
+      for (let i=0; i<languageQuestions.length; i++){
+        const q = languageQuestions[i];
+        questionLine.textContent = q.text;
+        questionSub.textContent = q.sub;
+        footerNote.textContent = "Language: " + q.lang;
+        await sleep(2100);
+      }
+
+      yesBtn.classList.remove("hidden");
+      noBtn.classList.remove("hidden");
+      questionLine.textContent = "💘";
+      questionSub.textContent = "So… what do you say?";
+      footerNote.textContent = "";
+    }
+
+    // playful "No" button (tap moves on phone)
+    function moveNoButton(){
+      const stage = document.querySelector(".stage");
+      const rect = stage.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = rect.width - btnRect.width - 18;
+      const maxY = rect.height - btnRect.height - 18;
+
+      const x = 10 + Math.random() * Math.max(10, maxX);
+      const y = 10 + Math.random() * Math.max(10, maxY);
+
+      noBtn.style.position = "absolute";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    async function typeWriter(line, speed=32){
+      typed.textContent = "";
+      for (let i=0; i<line.length; i++){
+        typed.textContent += line[i];
+        await sleep(speed);
+      }
+    }
+
+    async function playAnimation(){
+      scene.classList.add("on");
+      ring.classList.add("hidden");
+      finale.classList.add("hidden");
+      typed.textContent = "";
+
+      // Reveal poem first (smooth fade in)
+      await sleep(400);
+      poemBox.classList.add("show");
+      await sleep(2300);
+
+      // Then type lines
+      for (let i=0; i<animationLines.length; i++){
+        if (i === 2) ring.classList.remove("hidden");
+        if (i === 3){
+          await typeWriter(animationLines[i], 44);
+          await sleep(650);
+          continue;
+        }
+        await typeWriter(animationLines[i], 30);
+        await sleep(820);
+      }
+
+      finale.classList.remove("hidden");
+    }
+
+    function showConfetti(){
+      for (let i=0; i<90; i++){
+        setTimeout(() => {
+          const h = document.createElement("div");
+          h.className = "heart";
+          h.style.left = (50 + (Math.random()*44 - 22)) + "vw";
+          const size = 8 + Math.random()*14;
+          h.style.width = size + "px";
+          h.style.height = size + "px";
+          h.style.animationDuration = (2.2 + Math.random()*2.6) + "s";
+          hearts.appendChild(h);
+          setTimeout(() => h.remove(), 5200);
+        }, i * 12);
+      }
+    }
+
+    startBtn.addEventListener("click", cycleLanguages);
+
+    yesBtn.addEventListener("click", async () => {
+      hint.textContent = "I knew it… 🥹💞";
+      document.getElementById("questionArea").classList.add("hidden");
+      await playAnimation();
+      showConfetti();
+    });
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+    noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNoButton(); }, {passive:false});
+
+    confettiBtn.addEventListener("click", showConfetti);
+
+    restartBtn.addEventListener("click", () => {
+      scene.classList.remove("on");
+      document.getElementById("questionArea").classList.remove("hidden");
+
+      startBtn.classList.remove("hidden");
+      yesBtn.classList.add("hidden");
+      noBtn.classList.add("hidden");
+      noBtn.style.position = "";
+      noBtn.style.left = "";
+      noBtn.style.top = "";
+
+      questionLine.textContent = "💌";
+      questionSub.textContent = "Press start — and don’t blink.";
+      hint.textContent = "Tap “Start” when you’re ready 💘";
+      footerNote.textContent = "";
+      typed.textContent = "";
+      ring.classList.add("hidden");
+      finale.classList.add("hidden");
+
+      // reset poem for replay
+      poemBox.classList.remove("show");
+    });
+  </script>
+</body>
+</html>
