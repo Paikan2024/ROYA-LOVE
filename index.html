@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <!-- iPhone Safari friendly -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -11,30 +10,15 @@
 
   <style>
     :root{
-      --bgA:#03130b;
-      --bgB:#071f14;
-
-      --text:#eafff2;
-      --muted:rgba(234,255,242,.72);
-
-      --neo:#33ff99;
-      --mint:#9bffcf;
-      --lime:#cfff6a;
-
-      --red:#ff4d6d;
-      --rose:#ff7a90;
-
+      --bgA:#03130b; --bgB:#071f14;
+      --text:#eafff2; --muted:rgba(234,255,242,.72);
+      --neo:#33ff99; --mint:#9bffcf; --lime:#cfff6a;
+      --red:#ff4d6d; --rose:#ff7a90;
       --stroke: rgba(234,255,242,.14);
       --shadow: 0 18px 70px rgba(0,0,0,.55);
       --radius: 26px;
     }
-
-    *{
-      box-sizing:border-box;
-      -webkit-tap-highlight-color: transparent;
-      -webkit-text-size-adjust: 100%;
-    }
-
+    *{ box-sizing:border-box; -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust:100%; }
     html,body{ height:100%; }
     body{
       margin:0;
@@ -48,7 +32,6 @@
         linear-gradient(135deg, var(--bgA), var(--bgB));
       overflow:hidden;
     }
-
     .grid{
       position:fixed; inset:0;
       background-image:
@@ -60,7 +43,6 @@
       -webkit-mask-image: radial-gradient(circle at 50% 20%, rgba(0,0,0,1), rgba(0,0,0,.2), transparent 75%);
       pointer-events:none;
     }
-
     .aurora{
       position:fixed; inset:-40%;
       background:
@@ -77,15 +59,11 @@
       to{ transform: translate3d(1.5%, 1%, 0) scale(1.05); }
     }
 
-    /* Background particles */
     .particles{ position:fixed; inset:0; pointer-events:none; }
     .p{
-      position:absolute;
-      width:6px; height:6px;
-      border-radius:50%;
+      position:absolute; width:6px; height:6px; border-radius:50%;
       background: radial-gradient(circle at 30% 30%, var(--lime), rgba(51,255,153,.25));
-      opacity:0;
-      animation: rise linear infinite;
+      opacity:0; animation: rise linear infinite;
       filter: drop-shadow(0 12px 18px rgba(51,255,153,.10));
     }
     .p.red{
@@ -107,8 +85,7 @@
         max(14px, env(safe-area-inset-right))
         max(18px, env(safe-area-inset-bottom))
         max(14px, env(safe-area-inset-left));
-      position:relative;
-      z-index:2;
+      position:relative; z-index:2;
     }
 
     .shell{
@@ -122,7 +99,6 @@
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
     }
-
     .shell:before{
       content:"";
       position:absolute; inset:-2px;
@@ -130,41 +106,21 @@
         radial-gradient(circle at 20% 10%, rgba(51,255,153,.28), transparent 45%),
         radial-gradient(circle at 90% 35%, rgba(207,255,106,.18), transparent 55%),
         radial-gradient(circle at 85% 15%, rgba(255,77,109,.12), transparent 50%);
-      opacity:.85;
-      pointer-events:none;
+      opacity:.85; pointer-events:none;
     }
 
-    .content{
-      position:relative;
-      padding: 18px 16px 16px;
-      display:grid;
-      gap:12px;
-    }
-
-    .header{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
+    .content{ position:relative; padding: 18px 16px 16px; display:grid; gap:12px; }
+    .header{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center; }
     .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:999px;
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px; border-radius:999px;
       background: rgba(255,255,255,.06);
       border:1px solid rgba(234,255,242,.16);
       color:rgba(234,255,242,.80);
-      font-size:13px;
-      letter-spacing:.2px;
+      font-size:13px; letter-spacing:.2px;
     }
     .chip b{ color:var(--text); font-weight:900; }
-
-    .dot{
-      width:8px; height:8px; border-radius:50%;
+    .dot{ width:8px; height:8px; border-radius:50%;
       background: linear-gradient(180deg, var(--neo), var(--mint));
       box-shadow: 0 0 18px rgba(51,255,153,.55);
     }
@@ -173,25 +129,13 @@
       box-shadow: 0 0 18px rgba(255,77,109,.45);
     }
 
-    .hero{
-      display:grid;
-      gap:6px;
-      padding: 6px 2px 0;
-    }
+    .hero{ display:grid; gap:6px; padding: 6px 2px 0; }
     .hero h1{
-      margin:0;
-      font-size: clamp(24px, 5.7vw, 46px);
-      line-height:1.12;
-      letter-spacing:-.6px;
+      margin:0; font-size: clamp(24px, 5.7vw, 46px);
+      line-height:1.12; letter-spacing:-.6px;
       text-shadow: 0 10px 30px rgba(0,0,0,.45);
     }
-    .hero p{
-      margin:0;
-      font-size: clamp(14px, 3.7vw, 18px);
-      line-height:1.55;
-      color: var(--muted);
-      max-width: 70ch;
-    }
+    .hero p{ margin:0; font-size: clamp(14px, 3.7vw, 18px); line-height:1.55; color: var(--muted); max-width: 70ch; }
 
     .stage{
       margin-top:8px;
@@ -203,45 +147,17 @@
         rgba(255,255,255,.04);
       padding: 16px 14px;
       min-height: 440px;
-      position:relative;
-      overflow:hidden;
+      position:relative; overflow:hidden;
     }
 
-    .panel{
-      width:min(760px, 100%);
-      display:grid;
-      gap:14px;
-      place-items:center;
-      text-align:center;
-    }
+    .panel{ width:min(760px, 100%); display:grid; gap:14px; place-items:center; text-align:center; }
+    .question{ font-size: clamp(20px, 5vw, 40px); line-height:1.2; margin:0; }
+    .sub{ margin:0; color: var(--muted); font-size: clamp(14px, 3.7vw, 18px); line-height:1.55; max-width: 70ch; }
 
-    .question{
-      font-size: clamp(20px, 5vw, 40px);
-      line-height:1.2;
-      margin:0;
-    }
-    .sub{
-      margin:0;
-      color: var(--muted);
-      font-size: clamp(14px, 3.7vw, 18px);
-      line-height:1.55;
-      max-width: 70ch;
-    }
-
-    .actions{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:12px;
-      width:100%;
-      margin-top:2px;
-    }
-
+    .actions{ display:flex; justify-content:center; flex-wrap:wrap; gap:12px; width:100%; margin-top:2px; }
     button{
-      appearance:none;
-      -webkit-appearance:none;
-      border:none;
-      cursor:pointer;
+      appearance:none; -webkit-appearance:none;
+      border:none; cursor:pointer;
       border-radius: 999px;
       padding: 14px 18px;
       font-size: 16px;
@@ -253,7 +169,6 @@
       touch-action: manipulation;
     }
     button:active{ transform: translateY(1px) scale(.99); }
-
     .btn-main{
       background: linear-gradient(135deg, var(--neo), var(--mint));
       color: #041a10;
@@ -261,7 +176,6 @@
         drop-shadow(0 18px 40px rgba(51,255,153,.18))
         drop-shadow(0 10px 30px rgba(255,77,109,.08));
     }
-
     .btn-soft{
       background: rgba(255,255,255,.06);
       border:1px solid rgba(234,255,242,.18);
@@ -269,30 +183,17 @@
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
     }
+    .hint{ min-height:18px; font-size:12px; color: rgba(234,255,242,.55); letter-spacing:.2px; }
 
-    .hint{
-      min-height:18px;
-      font-size:12px;
-      color: rgba(234,255,242,.55);
-      letter-spacing:.2px;
-    }
-
-    /* Pages */
     .page{
       position:absolute; inset:0;
-      display:grid;
-      place-items:center;
-      opacity:0;
-      pointer-events:none;
+      display:grid; place-items:center;
+      opacity:0; pointer-events:none;
       transform: translateY(10px);
       transition: opacity .5s ease, transform .5s ease;
       padding: 14px;
     }
-    .page.on{
-      opacity:1;
-      pointer-events:auto;
-      transform: translateY(0);
-    }
+    .page.on{ opacity:1; pointer-events:auto; transform: translateY(0); }
 
     .bigCard{
       width:min(720px, 96%);
@@ -303,16 +204,9 @@
       padding: 16px 14px;
     }
 
-    .type{
-      font-size: clamp(16px, 4.4vw, 24px);
-      color: var(--text);
-      min-height: 3.1em;
-      max-width: 60ch;
-      padding: 0 4px;
-    }
+    .type{ font-size: clamp(16px, 4.4vw, 24px); min-height: 3.1em; max-width: 60ch; padding: 0 4px; }
     .cursor{
-      display:inline-block;
-      width:10px; height:1.1em;
+      display:inline-block; width:10px; height:1.1em;
       background: rgba(234,255,242,.75);
       margin-left:6px;
       transform: translateY(3px);
@@ -320,28 +214,16 @@
       border-radius:2px;
     }
     @keyframes blink{ 50%{ opacity:0; } }
-
-    .finalText{
-      font-size: clamp(16px, 4.2vw, 22px);
-      line-height:1.7;
-      color: rgba(234,255,242,.92);
-      margin:0;
-    }
+    .finalText{ font-size: clamp(16px, 4.2vw, 22px); line-height:1.7; color: rgba(234,255,242,.92); margin:0; }
+    .hidden{ display:none !important; }
 
     /* ===== FINAL ROSE OVERLAY (AUTO) ===== */
     .finalOverlay{
-      position:absolute;
-      inset:0;
-      z-index:50;
-      opacity:0;
-      pointer-events:none;
+      position:absolute; inset:0; z-index:50;
+      opacity:0; pointer-events:none;
       transition: opacity .55s ease;
     }
-    .finalOverlay.on{
-      opacity:1;
-      pointer-events:auto;
-    }
-
+    .finalOverlay.on{ opacity:1; pointer-events:auto; }
     .finalOverlay::before{
       content:"";
       position:absolute; inset:0;
@@ -349,35 +231,24 @@
         radial-gradient(700px 420px at 50% 10%, rgba(255,77,109,.14), transparent 60%),
         radial-gradient(700px 420px at 55% 20%, rgba(51,255,153,.10), transparent 60%),
         rgba(0,0,0,.20);
-      backdrop-filter: blur(2px);
       -webkit-backdrop-filter: blur(2px);
+      backdrop-filter: blur(2px);
     }
-
     .finalHud{
-      position:absolute;
-      top: 12px;
-      left: 12px;
-      right: 12px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
+      position:absolute; top: 12px; left: 12px; right: 12px;
+      display:flex; justify-content:space-between; gap:10px;
       z-index:3;
     }
     .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:999px;
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px; border-radius:999px;
       background: rgba(0,0,0,.20);
       border:1px solid rgba(234,255,242,.16);
       color: rgba(234,255,242,.88);
-      font-size: 13px;
-      letter-spacing:.2px;
+      font-size: 13px; letter-spacing:.2px;
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
     }
-
     .finalArea{
       position:absolute;
       inset: 60px 12px 64px 12px;
@@ -388,18 +259,11 @@
       box-shadow: 0 18px 60px rgba(0,0,0,.35);
       z-index:2;
     }
-
-    .roseRain{
-      position:absolute; inset:0;
-      z-index:1;
-    }
+    .roseRain{ position:absolute; inset:0; z-index:1; }
     .rose{
-      position:absolute;
-      top:-60px;
-      font-size: 22px;
+      position:absolute; top:-60px;
       line-height:1;
       opacity:.95;
-      transform: translate3d(0,0,0);
       will-change: transform;
       filter: drop-shadow(0 10px 18px rgba(0,0,0,.20));
       animation: fall linear infinite;
@@ -408,24 +272,18 @@
     @keyframes fall{
       from{ transform: translate3d(0, -70px, 0) rotate(0deg); opacity:0; }
       10%{ opacity:.95; }
-      to{ transform: translate3d(0, 900px, 0) rotate(360deg); opacity:0; }
+      to{ transform: translate3d(0, 1000px, 0) rotate(360deg); opacity:0; }
     }
-
     .spellMode .rose{
-      animation: none !important;
+      animation:none !important;
       transition: transform 2.8s cubic-bezier(.2,.9,.2,1), opacity .9s ease;
       opacity: 1;
     }
-
     .finalHint{
-      position:absolute;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
+      position:absolute; left: 12px; right: 12px; bottom: 12px;
       text-align:center;
       color: rgba(234,255,242,.72);
-      font-size: 13px;
-      letter-spacing:.2px;
+      font-size: 13px; letter-spacing:.2px;
       z-index:3;
       padding: 10px 12px;
       border-radius: 999px;
@@ -434,8 +292,6 @@
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
     }
-
-    .hidden{ display:none !important; }
 
     @media (min-width: 760px){
       .content{ padding: 26px 24px 22px; gap:14px; }
@@ -460,7 +316,7 @@
 
         <div class="hero">
           <h1>Roya… I have one question.</h1>
-          <p>At the very end… the screen “closes” and roses will rain down and spell something. 🌹</p>
+          <p>At the end, roses will rain down and clearly spell: <b>I LOVE YOU</b> 🌹</p>
         </div>
 
         <div class="stage" aria-live="polite">
@@ -511,7 +367,7 @@
             </div>
           </div>
 
-          <!-- FINAL ROSE OVERLAY (AUTO) -->
+          <!-- FINAL ROSE OVERLAY -->
           <div class="finalOverlay" id="finalOverlay">
             <div class="finalHud">
               <div class="tag">🌹 Finale</div>
@@ -524,14 +380,13 @@
 
             <div class="finalHint" id="finalHint">Wait for it… 🌹</div>
           </div>
-
-        </div><!-- stage -->
-      </div><!-- content -->
-    </div><!-- shell -->
-  </div><!-- wrap -->
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    // background particles
+    // Background particles
     const particles = document.getElementById("particles");
     function spawnParticle(){
       const d = document.createElement("div");
@@ -549,7 +404,7 @@
     for(let i=0;i<18;i++) setTimeout(spawnParticle, i*120);
     function burst(){ for (let i=0; i<70; i++) setTimeout(spawnParticle, i*8); }
 
-    // elements
+    // Elements
     const status = document.getElementById("status");
     const page1 = document.getElementById("page1");
     const page2 = document.getElementById("page2");
@@ -613,7 +468,6 @@
       hint1.textContent = "";
     }
 
-    // playful no button
     function moveNoButton(){
       const stage = document.querySelector(".stage");
       const rect = stage.getBoundingClientRect();
@@ -649,12 +503,12 @@
       finalMsg.classList.remove("hidden");
       burst();
 
-      // AUTO: after everything is "over", trigger rose finale
+      // auto finale
       await sleep(1400);
       triggerRoseFinale();
     }
 
-    // ===== AUTO ROSE FINALE =====
+    // ===== Rose Finale (fixed for iPhone) =====
     const finalOverlay = document.getElementById("finalOverlay");
     const finalArea = document.getElementById("finalArea");
     const roseRain = document.getElementById("roseRain");
@@ -681,9 +535,12 @@
       el.className = "rose";
       el.textContent = "🌹";
 
-      const left = Math.random() * 100;        // vw (relative to overlay)
-      const size = 16 + Math.random() * 18;
-      const dur = 4 + Math.random() * 4.5;
+      const rect = finalArea.getBoundingClientRect();
+      const small = rect.width < 420;
+
+      const left = Math.random() * 100; // vw within overlay layer (fine visually)
+      const size = small ? (16 + Math.random()*14) : (18 + Math.random()*18);
+      const dur  = small ? (3.8 + Math.random()*4.2) : (4 + Math.random()*4.8);
       const delay = Math.random() * 1.2;
 
       el.style.left = left + "vw";
@@ -695,65 +552,75 @@
       roseRain.appendChild(el);
       roses.push(el);
 
-      // cap count for performance
-      if (roses.length > 240){
+      if (roses.length > 220){
         const old = roses.shift();
         old && old.remove();
       }
     }
 
-    function getTextPoints(text, w, h){
+    // Get points from canvas text (two-line for phone clarity)
+    function getTextPoints(lines, w, h){
       const canvas = document.createElement("canvas");
       canvas.width = w;
       canvas.height = h;
       const ctx = canvas.getContext("2d");
 
       ctx.clearRect(0,0,w,h);
-      const fontSize = Math.max(42, Math.min(86, Math.floor(w / 7.5)));
+
+      const isSmall = w < 420;
+      const fontSize = isSmall ? Math.floor(w / 5.2) : Math.floor(w / 6.2); // bigger on small screens
+      const safeFont = Math.max(44, Math.min(92, fontSize));
+
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillStyle = "#fff";
-      ctx.font = `900 ${fontSize}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
+      ctx.font = `900 ${safeFont}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
 
-      ctx.fillText(text, w/2, h/2);
+      const lineHeight = safeFont * 1.05;
+      const totalHeight = (lines.length - 1) * lineHeight;
+      const startY = h/2 - totalHeight/2;
+
+      lines.forEach((ln, i) => {
+        ctx.fillText(ln, w/2, startY + i*lineHeight);
+      });
 
       const img = ctx.getImageData(0,0,w,h).data;
 
+      // density: tighter for small screens so letters look solid
+      const gap = isSmall ? 8 : 10;
+
       const points = [];
-      const gap = 10;
       for (let y=0; y<h; y+=gap){
         for (let x=0; x<w; x+=gap){
           const idx = (y*w + x) * 4 + 3;
           if (img[idx] > 70) points.push([x,y]);
         }
       }
+
+      // If too many points, thin them evenly to match rose count nicely
       return points;
     }
 
     function triggerRoseFinale(){
-      // show overlay (covers the whole stage -> "everything is closed")
       finalOverlay.classList.add("on");
       finalStatus.textContent = "Raining roses…";
       finalHint.textContent = "Wait for it… 🌹";
 
       clearRoses();
 
-      // start rain
       for (let i=0;i<70;i++) createRose();
       rainTimer = setInterval(createRose, 120);
 
-      // after a few seconds, spell
       finaleTimer = setTimeout(spellWithRoses, 5200);
     }
 
     function spellWithRoses(){
       finalStatus.textContent = "Spelling…";
-      finalHint.textContent = "🌹  I LOVE YOU  🌹";
+      finalHint.textContent = "I LOVE YOU 🌹";
 
       if (rainTimer) { clearInterval(rainTimer); rainTimer = null; }
 
-      // ensure enough roses
-      while (roses.length < 190) createRose();
+      while (roses.length < 210) createRose();
 
       finalArea.classList.add("spellMode");
 
@@ -761,15 +628,20 @@
       const w = Math.floor(rect.width);
       const h = Math.floor(rect.height);
 
-      const message = "I LOVE YOU";
-      const points = getTextPoints(message, w, h);
-      const targets = points.slice(0, Math.min(points.length, roses.length));
+      // Two-line message => much clearer on iPhone
+      const lines = ["I LOVE", "YOU"];
+      let points = getTextPoints(lines, w, h);
 
-      // move roses to pixel positions inside finalArea
-      roses.forEach(r => {
-        r.style.left = "0px";
-        r.style.top = "0px";
-      });
+      // Trim points to available roses (evenly)
+      const max = Math.min(points.length, roses.length);
+      const step = points.length / max;
+      const targets = [];
+      for (let i=0; i<max; i++){
+        targets.push(points[Math.floor(i * step)]);
+      }
+
+      // Position roses inside finalArea using translate
+      roses.forEach(r => { r.style.left = "0px"; r.style.top = "0px"; });
 
       // quick scatter
       roses.forEach((r) => {
@@ -789,7 +661,6 @@
           r.style.opacity = "1";
         });
 
-        // fade extras
         for (let i=targets.length; i<roses.length; i++){
           roses[i].style.opacity = "0";
           roses[i].style.transform = `translate3d(${w/2}px, ${h + 60}px, 0) rotate(0deg)`;
@@ -800,7 +671,6 @@
           finalHint.textContent = "Happy Valentine’s Day 🌹";
           burst();
         }, 2900);
-
       }, 650);
     }
 
@@ -829,13 +699,11 @@
     restartBtn.addEventListener("click", () => restartAll());
 
     function restartAll(){
-      // hide overlay & clear roses
       finalOverlay.classList.remove("on");
       clearRoses();
       finalStatus.textContent = "Raining roses…";
       finalHint.textContent = "Wait for it… 🌹";
 
-      // reset pages
       showPage(1);
       status.textContent = "Tap “Start” when you’re ready 💚❤️";
 
@@ -850,7 +718,6 @@
       s1.textContent = "Press start — and don’t blink.";
       hint1.textContent = "";
 
-      // reset page2
       poemCard.classList.add("hidden");
       typed.textContent = "";
       finalMsg.classList.add("hidden");
